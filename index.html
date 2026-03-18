@@ -5,297 +5,88 @@
   <title>مسابقة العيد – عائلة اللحيدان</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Tahoma", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Tahoma",system-ui}
+    body{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#0f172a,#1e293b,#0f766e);
+      background-size:300% 300%;animation:gradientMove 12s ease infinite;color:#f9fafb
     }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #0f172a, #1e293b, #0f766e);
-      background-size: 300% 300%;
-      animation: gradientMove 12s ease infinite;
-      color: #f9fafb;
+    @keyframes gradientMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .overlay-pattern {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.08;
+    .overlay-pattern{
+      position:fixed;inset:0;pointer-events:none;opacity:.08;
       background-image:
-        radial-gradient(circle at 10% 20%, #facc15 0, transparent 40%),
-        radial-gradient(circle at 80% 0%, #22c55e 0, transparent 45%),
-        radial-gradient(circle at 0% 80%, #38bdf8 0, transparent 40%);
-      mix-blend-mode: screen;
+        radial-gradient(circle at 10% 20%,#facc15 0,transparent 40%),
+        radial-gradient(circle at 80% 0%,#22c55e 0,transparent 45%),
+        radial-gradient(circle at 0% 80%,#38bdf8 0,transparent 40%);
+      mix-blend-mode:screen
     }
-
-    .container {
-      width: 100%;
-      max-width: 480px;
-      background: rgba(15, 23, 42, 0.92);
-      border-radius: 18px;
-      padding: 20px 18px 22px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
-      position: relative;
-      overflow: hidden;
+    .container{
+      width:100%;max-width:480px;background:rgba(15,23,42,.92);
+      border-radius:18px;padding:20px 18px 22px;
+      box-shadow:0 18px 45px rgba(0,0,0,.55);position:relative;overflow:hidden
     }
-
-    .header {
-      text-align: center;
-      margin-bottom: 16px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
-      padding-bottom: 10px;
+    .header{text-align:center;margin-bottom:16px;border-bottom:1px solid rgba(148,163,184,.4);padding-bottom:10px}
+    .header-title{font-size:1.3rem;font-weight:700;color:#facc15;margin-bottom:4px}
+    .header-sub{font-size:.9rem;color:#e5e7eb;margin-bottom:3px}
+    .header-special{font-size:.9rem;color:#f97316;font-weight:600;margin-bottom:3px}
+    .header-note{font-size:.85rem;color:#cbd5f5}
+    .section{display:none}
+    .section.active{display:block}
+    .label{font-size:.95rem;margin-bottom:6px;color:#e5e7eb}
+    input[type=text]{
+      width:100%;padding:10px 12px;border-radius:10px;border:1px solid #4b5563;
+      background:#020617;color:#f9fafb;font-size:.95rem;outline:none
     }
-
-    .header-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #facc15;
-      margin-bottom: 4px;
+    input::placeholder{color:#6b7280}
+    .btn{
+      width:100%;margin-top:14px;padding:10px 12px;border-radius:999px;border:none;
+      font-size:.98rem;font-weight:600;cursor:pointer;
+      transition:transform .15s ease,box-shadow .15s ease,background .15s ease
     }
-
-    .header-sub {
-      font-size: 0.9rem;
-      color: #e5e7eb;
-      margin-bottom: 3px;
+    .btn-primary{
+      background:linear-gradient(135deg,#22c55e,#16a34a);color:#022c22;
+      box-shadow:0 10px 25px rgba(34,197,94,.35)
     }
-
-    .header-special {
-      font-size: 0.9rem;
-      color: #f97316;
-      font-weight: 600;
-      margin-bottom: 3px;
+    .btn-secondary{background:#0f172a;color:#e5e7eb;border:1px solid #4b5563}
+    .info-box{
+      margin-top:10px;padding:10px 12px;border-radius:12px;
+      background:rgba(15,118,110,.15);border:1px solid rgba(45,212,191,.4);
+      font-size:.85rem;color:#e0f2fe
     }
-
-    .header-note {
-      font-size: 0.85rem;
-      color: #cbd5f5;
+    .question-text{font-size:1rem;font-weight:600;margin-bottom:10px;color:#f9fafb}
+    .options{margin-top:8px}
+    .option{margin-bottom:8px}
+    .option input{margin-left:6px;transform:scale(1.1)}
+    .option label{font-size:.95rem;color:#e5e7eb;cursor:pointer}
+    .question-meta{
+      display:flex;justify-content:space-between;align-items:center;
+      font-size:.8rem;color:#9ca3af;margin-bottom:8px
     }
-
-    .section {
-      display: none;
+    .timer-wrapper{display:flex;justify-content:center;margin:10px 0 6px}
+    .timer-circle{
+      width:70px;height:70px;border-radius:50%;border:4px solid rgba(148,163,184,.4);
+      display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden
     }
-
-    .section.active {
-      display: block;
+    .timer-fill{
+      position:absolute;inset:0;border-radius:50%;
+      background:conic-gradient(#22c55e var(--deg,0deg),transparent 0deg);z-index:1
     }
-
-    .label {
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-      color: #e5e7eb;
+    .timer-inner{
+      position:relative;z-index:2;width:52px;height:52px;border-radius:50%;
+      background:#020617;display:flex;align-items:center;justify-content:center;
+      font-size:.9rem;color:#e5e7eb;font-weight:600
     }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #4b5563;
-      background: #020617;
-      color: #f9fafb;
-      font-size: 0.95rem;
-      outline: none;
+    .result-title{
+      font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:8px;color:#facc15
     }
-
-    input[type="text"]::placeholder {
-      color: #6b7280;
-    }
-
-    .btn {
-      width: 100%;
-      margin-top: 14px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: none;
-      font-size: 0.98rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #022c22;
-      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.35);
-    }
-
-    .btn-primary:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4);
-    }
-
-    .btn-secondary {
-      background: #0f172a;
-      color: #e5e7eb;
-      border: 1px solid #4b5563;
-    }
-
-    .btn-secondary:active {
-      transform: translateY(1px) scale(0.99);
-    }
-
-    .info-box {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(15, 118, 110, 0.15);
-      border: 1px solid rgba(45, 212, 191, 0.4);
-      font-size: 0.85rem;
-      color: #e0f2fe;
-    }
-
-    .info-box strong {
-      color: #facc15;
-    }
-
-    .question-text {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #f9fafb;
-    }
-
-    .options {
-      margin-top: 8px;
-    }
-
-    .option {
-      margin-bottom: 8px;
-    }
-
-    .option input {
-      margin-left: 6px;
-      transform: scale(1.1);
-    }
-
-    .option label {
-      font-size: 0.95rem;
-      color: #e5e7eb;
-      cursor: pointer;
-    }
-
-    .question-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      color: #9ca3af;
-      margin-bottom: 8px;
-    }
-
-    .timer-wrapper {
-      display: flex;
-      justify-content: center;
-      margin: 10px 0 6px;
-    }
-
-    .timer-circle {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 4px solid rgba(148, 163, 184, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .timer-fill {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: conic-gradient(#22c55e var(--deg, 0deg), transparent 0deg);
-      z-index: 1;
-    }
-
-    .timer-inner {
-      position: relative;
-      z-index: 2;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      color: #e5e7eb;
-      font-weight: 600;
-    }
-
-    .result-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 8px;
-      color: #facc15;
-    }
-
-    .result-score {
-      text-align: center;
-      font-size: 1rem;
-      margin-bottom: 6px;
-    }
-
-    .result-details {
-      font-size: 0.9rem;
-      margin-top: 8px;
-      color: #e5e7eb;
-    }
-
-    .result-details span {
-      color: #f97316;
-      font-weight: 600;
-    }
-
-    .wrong-list {
-      margin-top: 6px;
-      font-size: 0.9rem;
-      color: #fecaca;
-    }
-
-    .attempts-info {
-      margin-top: 10px;
-      font-size: 0.85rem;
-      color: #cbd5f5;
-      text-align: center;
-    }
-
-    .small-note {
-      margin-top: 6px;
-      font-size: 0.8rem;
-      color: #9ca3af;
-      text-align: center;
-    }
-
-    .fade-message {
-      margin-top: 10px;
-      padding: 8px 10px;
-      border-radius: 10px;
-      background: rgba(30, 64, 175, 0.2);
-      border: 1px solid rgba(129, 140, 248, 0.5);
-      font-size: 0.85rem;
-      color: #e0e7ff;
-      text-align: center;
-      display: none;
-    }
-
-    .fade-message.show {
-      display: block;
-    }
+    .result-score{text-align:center;font-size:1rem;margin-bottom:6px;white-space:pre-line}
+    .wrong-list{margin-top:6px;font-size:.9rem;color:#fecaca}
+    .attempts-info{margin-top:10px;font-size:.85rem;color:#cbd5f5;text-align:center}
+    .small-note{margin-top:6px;font-size:.8rem;color:#9ca3af;text-align:center}
   </style>
 </head>
 <body>
@@ -308,9 +99,6 @@
       <div class="header-special">بشرف حضور ماما طرفة ❤️</div>
       <div class="header-note">نورتوا المسابقة ونتمنى لكم حظًا موفقًا في الفوز بالجائزة 🎁</div>
     </div>
-
-    <!-- رسالة توضيح المحاولتين -->
-    <div id="attemptMessage" class="fade-message"></div>
 
     <!-- صفحة البداية -->
     <div id="startPage" class="section active">
@@ -339,7 +127,6 @@
           <div class="timer-inner" id="timerText">20</div>
         </div>
       </div>
-
       <div class="small-note">لديك 20 ثانية للإجابة على كل سؤال</div>
 
       <div class="question-text" id="questionText"></div>
@@ -352,14 +139,10 @@
     <div id="resultPage" class="section">
       <div class="result-title">🌙✨ نتيجة اختبار العيد ✨🌙</div>
       <div class="result-score" id="resultScore"></div>
-      <div class="result-details" id="resultDetails"></div>
       <div class="wrong-list" id="wrongList"></div>
 
       <button class="btn btn-primary" onclick="sendWhatsApp()">إرسال النتيجة بالواتساب</button>
-
-      <button id="retryBtn" class="btn btn-secondary" style="margin-top:8px;" onclick="restartQuiz()">
-        🔄 محاولة أخرى
-      </button>
+      <button id="retryBtn" class="btn btn-secondary" onclick="restartQuiz()">🔄 محاولة أخرى</button>
 
       <div class="attempts-info" id="attemptsInfo"></div>
       <div class="small-note">بعد استنفاد المحاولتين لن تتمكن من إعادة المسابقة من نفس الجهاز.</div>
@@ -367,161 +150,40 @@
   </div>
 
   <script>
-    // رقم المنظم
     const ORGANIZER_PHONE = "966564009092";
 
-    // الأسئلة (30 سؤالاً)
+    // أسئلتك الـ 30 بالضبط
     const questions = [
-      {
-        q: "كم عدد أركان الإسلام؟",
-        options: ["3", "4", "5", "6"],
-        correct: 2
-      },
-      {
-        q: "ما هو اليوم الذي يوافق عيد الفطر؟",
-        options: ["1 شوال", "10 ذي الحجة", "1 رمضان", "15 شعبان"],
-        correct: 0
-      },
-      {
-        q: "كم عدد الصلوات المفروضة في اليوم والليلة؟",
-        options: ["3", "4", "5", "6"],
-        correct: 2
-      },
-      {
-        q: "ما هي زكاة الفطر تُخرج عن؟",
-        options: ["المال فقط", "النفس (الشخص)", "البيت", "السيارة"],
-        correct: 1
-      },
-      {
-        q: "ما هو الركن الأول من أركان الإسلام؟",
-        options: ["الصلاة", "الزكاة", "الشهادتان", "الصوم"],
-        correct: 2
-      },
-      {
-        q: "في أي شهر يكون صيام رمضان؟",
-        options: ["شوال", "رمضان", "ذو الحجة", "رجب"],
-        correct: 1
-      },
-      {
-        q: "ما هي تحية العيد المشهورة؟",
-        options: ["صباح الخير", "كل عام وأنتم بخير", "مع السلامة", "أهلاً وسهلاً"],
-        correct: 1
-      },
-      {
-        q: "ما هو العيد الذي يأتي بعد صيام شهر رمضان؟",
-        options: ["عيد الأضحى", "عيد الفطر", "عيد الميلاد", "لا شيء مما سبق"],
-        correct: 1
-      },
-      {
-        q: "ما هو العيد الذي يكون فيه الأضحية؟",
-        options: ["عيد الفطر", "عيد الأضحى", "عيد الأم", "عيد العمال"],
-        correct: 1
-      },
-      {
-        q: "كم عدد أيام عيد الفطر؟",
-        options: ["يوم واحد", "يومان", "ثلاثة أيام", "أربعة أيام"],
-        correct: 0
-      },
-      {
-        q: "كم عدد أيام عيد الأضحى؟",
-        options: ["يوم واحد", "يومان", "ثلاثة أيام", "أربعة أيام"],
-        correct: 3
-      },
-      {
-        q: "ما هو التكبير في العيد؟",
-        options: ["قول: سبحان الله فقط", "قول: لا إله إلا الله فقط", "قول: الله أكبر، الله أكبر...", "قول: الحمد لله كثيرًا"],
-        correct: 2
-      },
-      {
-        q: "أي مما يلي من سنن العيد؟",
-        options: ["الصيام", "التطيب ولبس الجديد", "ترك الصلاة", "السفر بلا سبب"],
-        correct: 1
-      },
-      {
-        q: "ما هي زكاة الفطر من؟",
-        options: ["الطعام غالبًا", "الذهب فقط", "السيارات", "الأثاث"],
-        correct: 0
-      },
-      {
-        q: "من هو أول من أسلم من الصبيان؟",
-        options: ["علي بن أبي طالب", "أبو بكر الصديق", "عمر بن الخطاب", "عثمان بن عفان"],
-        correct: 0
-      },
-      {
-        q: "ما هي قبلة المسلمين؟",
-        options: ["بيت المقدس", "الكعبة المشرفة", "مسجد قباء", "مسجد القبلتين"],
-        correct: 1
-      },
-      {
-        q: "في أي بلد توجد الكعبة؟",
-        options: ["مصر", "السعودية", "تركيا", "المغرب"],
-        correct: 1
-      },
-      {
-        q: "ما هو اليوم الذي يسبق عيد الفطر؟",
-        options: ["آخر يوم من رمضان", "أول يوم من رمضان", "يوم عرفة", "يوم التروية"],
-        correct: 0
-      },
-      {
-        q: "ما هو اليوم الذي يسبق عيد الأضحى؟",
-        options: ["يوم عرفة", "يوم عاشوراء", "أول رمضان", "آخر شعبان"],
-        correct: 0
-      },
-      {
-        q: "ما هو الركن الثاني من أركان الإسلام؟",
-        options: ["الصلاة", "الزكاة", "الصوم", "الحج"],
-        correct: 0
-      },
-      {
-        q: "ما هي ليلة القدر في الغالب؟",
-        options: ["ليلة 10 رمضان", "ليلة 27 رمضان", "ليلة 1 شوال", "ليلة 15 شعبان"],
-        correct: 1
-      },
-      {
-        q: "أي مما يلي من آداب العيد؟",
-        options: ["قطع الأرحام", "التكبير والتهنئة", "إيذاء الناس", "ترك الصلاة"],
-        correct: 1
-      },
-      {
-        q: "ما هو أفضل الذكر في العيد؟",
-        options: ["التكبير", "الاستغفار فقط", "الصمت", "لا شيء"],
-        correct: 0
-      },
-      {
-        q: "من هو خاتم الأنبياء؟",
-        options: ["موسى عليه السلام", "عيسى عليه السلام", "محمد ﷺ", "إبراهيم عليه السلام"],
-        correct: 2
-      },
-      {
-        q: "ما هو كتاب المسلمين؟",
-        options: ["الإنجيل", "التوراة", "الزبور", "القرآن الكريم"],
-        correct: 3
-      },
-      {
-        q: "كم عدد أجزاء القرآن الكريم؟",
-        options: ["10", "20", "30", "40"],
-        correct: 2
-      },
-      {
-        q: "ما هي أول سورة في المصحف؟",
-        options: ["البقرة", "الفاتحة", "الإخلاص", "الناس"],
-        correct: 1
-      },
-      {
-        q: "ما هي آخر سورة في المصحف؟",
-        options: ["الفلق", "الإخلاص", "الناس", "الكافرون"],
-        correct: 2
-      },
-      {
-        q: "أي مما يلي من شعائر العيد؟",
-        options: ["صلاة العيد", "صيام العيد", "ترك السلام", "إيذاء الجيران"],
-        correct: 0
-      },
-      {
-        q: "ما هو أفضل ما يقال في التهنئة بالعيد؟",
-        options: ["كل عام وأنتم بخير", "مع السلامة", "أراك لاحقًا", "لا تهنئة"],
-        correct: 0
-      }
+      { q: "من اكثر شخص سافر داخل المملكة وخارجها؟", options: ["اعتدال","راشد","محمد","عبدالعزيز"], correct: 3 },
+      { q: "ماهي ابعد دولة من السعودية سافر لها؟", options: ["اعتدال","راشد","نورة","عبدالعزيز"], correct: 0 },
+      { q: "من أكبر فرد في عائلتنا؟", options: ["راشد","محمد","هيا","طرفة"], correct: 3 },
+      { q: "ماهي المادة التي تطرد القطط من المكان؟", options: ["كربوهيدرات","كربونات الصوديوم","الملح البحري","النشادر"], correct: 3 },
+      { q: "من الشخص المعروف بحبّه الشديد للشاهي؟", options: ["راشد","محمد","عبدالرحمن محمد","سليمان"], correct: 1 },
+      { q: "أفراد العائلة تأخرًا عن المناسبات؟", options: ["نواف بن راشد","عبدالعزيز","أشواق","بدر بن محمد"], correct: 1 },
+      { q: "من أكثر أفراد العائلة متابعةً للمباريات الرياضية؟", options: ["خالد النعيمه","خالد المنصور","سليمان بن محمد","بدر بن محمد"], correct: 0 },
+      { q: "من هو الشخص الذي لا يرد على رسائل القروب؟", options: ["سليمان","بدر","نواف","حمد"], correct: 2 },
+      { q: "من أكثر واحد ينسى يقفل السيارة؟", options: ["محمد","راشد","عبدالعزيز","جميع ما سبق"], correct: 1 },
+      { q: "من آخر من رزق بمولود/ة في العائلة؟", options: ["ذكرى","الهنوف","عبدالعزيز","حمد"], correct: 1 },
+      { q: "من أبعد منزل عن بيت الجدة (طرفة)؟", options: ["محمد","عبدالعزيز","ذكرى","الهنوف"], correct: 1 },
+      { q: "ماهو الحي الذي لا يوجد به حرامية؟", options: ["السويدي","النرجس","البديعة","الشفا"], correct: 1 },
+      { q: "من الشخص الذي لا تستطيع أن تكذب عليه ويسكت؟", options: ["حمد","جوري","العنود","نورة"], correct: 3 },
+      { q: "من أكثر شخص يحب التصوير بالسناب؟", options: ["العنود","طرفة بنت راشد","اعتدال","أشواق"], correct: 2 },
+      { q: "من أكثر واحد يرسل في القروبات؟", options: ["راشد","هيا","محمد","سليمان"], correct: 2 },
+      { q: "من الذي ينام في أي مكان؟", options: ["حمد","راشد","هيا","عبدالعزيز"], correct: 1 },
+      { q: "من عرّاب اللاء؟", options: ["راشد","محمد","عبدالعزيز","حمد"], correct: 1 },
+      { q: "من الذي مطفوق ويطاق مع العالم في السيارة؟", options: ["سليمان","أشواق","حمد","العنود"], correct: 2 },
+      { q: "من الشخص الذي يحب يتكشخ في جميع الأوقات؟", options: ["حمد","سليمان","نواف","عبدالرحمن بن محمد"], correct: 1 },
+      { q: "من أكثر شخص يشتري سيارات؟", options: ["محمد","راشد","عبدالعزيز","حمد"], correct: 1 },
+      { q: "من هو اللي يلبس كاب غالبًا؟", options: ["راشد","محمد","نواف","عبدالرحمن"], correct: 3 },
+      { q: "من اللي جاه حالة إسهال في الشالية؟", options: ["أشواق","نورة","هيا","ذكرى"], correct: 0 },
+      { q: "من اللي يخاف من مايكل جاكسون؟", options: ["ترف","جوري","عنود","عهود"], correct: 3 },
+      { q: "من اللي تتكلم برماوي؟", options: ["جوري","الهنوف","طرفة","العنود"], correct: 0 },
+      { q: "من اللي يصيح إذا شاف شايب؟", options: ["نورة","هيا","اعتدال","طرفة"], correct: 3 },
+      { q: "من اللي يحب أكل الفنادق؟", options: ["إبراهيم","وليد","بدر","سليمان"], correct: 1 },
+      { q: "من اللي ما ياكل أكل مسخّن أو بايت؟", options: ["حمد","سليمان","بدر","فهد"], correct: 3 },
+      { q: "من الذي لا يحب الأطفال؟", options: ["بدر","نواف","سليمان","عبدالله"], correct: 1 },
+      { q: "من أكثر شخص يحب ضرما؟", options: ["سليمان","بدر","محمد","شادي"], correct: 2 },
+      { q: "من يحب البط؟", options: ["سليمان","خالد","فهد","بدر"], correct: 3 }
     ];
 
     let currentIndex = 0;
@@ -543,34 +205,21 @@
     const timerText = document.getElementById("timerText");
     const timerFill = document.getElementById("timerFill");
     const resultScore = document.getElementById("resultScore");
-    const resultDetails = document.getElementById("resultDetails");
     const wrongList = document.getElementById("wrongList");
     const attemptsInfo = document.getElementById("attemptsInfo");
     const retryBtn = document.getElementById("retryBtn");
-    const attemptMessage = document.getElementById("attemptMessage");
 
-    function showSection(section) {
-      [startPage, questionPage, resultPage].forEach(s => s.classList.remove("active"));
+    function showSection(section){
+      [startPage,questionPage,resultPage].forEach(s=>s.classList.remove("active"));
       section.classList.add("active");
     }
 
-    function showAttemptMessage(text) {
-      attemptMessage.textContent = text;
-      attemptMessage.classList.add("show");
-      setTimeout(() => {
-        attemptMessage.classList.remove("show");
-      }, 3500);
-    }
-
-    function startQuiz() {
+    function startQuiz(){
       playerName = document.getElementById("playerName").value.trim();
-      if (!playerName) {
-        alert("من فضلك أدخل اسمك أولاً.");
-        return;
-      }
+      if(!playerName){ alert("من فضلك أدخل اسمك أولاً."); return; }
 
       attempts = Number(localStorage.getItem("lh_eid_attempts") || 0);
-      if (attempts >= 2) {
+      if(attempts >= 2){
         alert("لقد استخدمت المحاولتين المتاحة لك من هذا الجهاز.");
         return;
       }
@@ -580,39 +229,31 @@
       score = 0;
       wrongQuestions = [];
 
-      showAttemptMessage("لديك محاولتان فقط للفوز بالجائزة 🎁 هذه هي المحاولة رقم " + currentAttempt + " من 2.");
-
       showSection(questionPage);
       loadQuestion();
       startTimer();
     }
 
-    function loadQuestion() {
-      if (currentIndex >= questions.length) {
-        endQuiz();
-        return;
-      }
+    function loadQuestion(){
+      if(currentIndex >= questions.length){ endQuiz(); return; }
 
       const qObj = questions[currentIndex];
-      questionNumber.textContent = `السؤال ${currentIndex + 1} من ${questions.length}`;
+      questionNumber.textContent = `السؤال ${currentIndex+1} من ${questions.length}`;
       attemptLabel.textContent = `المحاولة ${currentAttempt} من 2`;
-
       questionText.textContent = qObj.q;
-      optionsContainer.innerHTML = "";
 
-      qObj.options.forEach((opt, idx) => {
+      optionsContainer.innerHTML = "";
+      qObj.options.forEach((opt,idx)=>{
         const div = document.createElement("div");
         div.className = "option";
         const input = document.createElement("input");
         input.type = "radio";
         input.name = "option";
-        input.id = "opt" + idx;
+        input.id = "opt"+idx;
         input.value = idx;
-
         const label = document.createElement("label");
-        label.htmlFor = "opt" + idx;
+        label.htmlFor = "opt"+idx;
         label.textContent = opt;
-
         div.appendChild(input);
         div.appendChild(label);
         optionsContainer.appendChild(div);
@@ -621,71 +262,53 @@
       resetTimer();
     }
 
-    function getSelectedOption() {
+    function getSelectedOption(){
       const radios = document.querySelectorAll('input[name="option"]');
-      for (const r of radios) {
-        if (r.checked) return Number(r.value);
-      }
+      for(const r of radios){ if(r.checked) return Number(r.value); }
       return null;
     }
 
-    function nextQuestion() {
+    function nextQuestion(){
       evaluateAnswer();
       currentIndex++;
-      if (currentIndex < questions.length) {
-        loadQuestion();
-      } else {
-        endQuiz();
-      }
+      if(currentIndex < questions.length) loadQuestion();
+      else endQuiz();
     }
 
-    function evaluateAnswer() {
+    function evaluateAnswer(){
       const selected = getSelectedOption();
       const correctIndex = questions[currentIndex].correct;
-      if (selected === correctIndex) {
-        score++;
-      } else {
-        wrongQuestions.push(currentIndex + 1);
-      }
+      if(selected === correctIndex) score++;
+      else wrongQuestions.push(currentIndex+1);
       stopTimer();
     }
 
-    function startTimer() {
+    function startTimer(){
       timeLeft = 20;
       updateTimerUI();
-      timer = setInterval(() => {
+      timer = setInterval(()=>{
         timeLeft--;
         updateTimerUI();
-        if (timeLeft <= 0) {
-          // انتهى الوقت، نعتبر السؤال خاطئًا إن لم يجب
-          wrongQuestions.push(currentIndex + 1);
+        if(timeLeft <= 0){
+          wrongQuestions.push(currentIndex+1);
           stopTimer();
           currentIndex++;
-          if (currentIndex < questions.length) {
-            loadQuestion();
-          } else {
-            endQuiz();
-          }
+          if(currentIndex < questions.length) loadQuestion();
+          else endQuiz();
         }
-      }, 1000);
+      },1000);
     }
 
-    function resetTimer() {
-      stopTimer();
-      startTimer();
-    }
+    function resetTimer(){ stopTimer(); startTimer(); }
+    function stopTimer(){ if(timer) clearInterval(timer); }
 
-    function stopTimer() {
-      if (timer) clearInterval(timer);
-    }
-
-    function updateTimerUI() {
+    function updateTimerUI(){
       timerText.textContent = timeLeft;
-      const deg = (1 - timeLeft / 20) * 360;
-      timerFill.style.setProperty("--deg", deg + "deg");
+      const deg = (1 - timeLeft/20)*360;
+      timerFill.style.setProperty("--deg",deg+"deg");
     }
 
-    function endQuiz() {
+    function endQuiz(){
       stopTimer();
       attempts = Number(localStorage.getItem("lh_eid_attempts") || 0);
       attempts++;
@@ -693,35 +316,33 @@
 
       showSection(resultPage);
 
-      resultScore.textContent = `👤 الاسم: ${playerName}\n📊 الدرجة: ${score} / ${questions.length}`;
-      resultDetails.textContent = `📌 المحاولة: ${attempts} من 2`;
+      resultScore.textContent =
+        `👤 الاسم: ${playerName}\n📌 المحاولة: ${attempts} من 2\n📊 الدرجة: ${score} / ${questions.length}`;
 
-      if (wrongQuestions.length > 0) {
-        wrongList.textContent = "❌ الأسئلة الخاطئة: " + wrongQuestions.map(n => "س" + n).join(" – ");
-      } else {
+      if(wrongQuestions.length > 0){
+        wrongList.textContent = "❌ الأسئلة الخاطئة: " + wrongQuestions.map(n=>"س"+n).join(" – ");
+      }else{
         wrongList.textContent = "ما شاء الله! أجبت على جميع الأسئلة بشكل صحيح ✅";
       }
 
-      if (attempts >= 2) {
+      if(attempts >= 2){
         retryBtn.style.display = "none";
         attemptsInfo.textContent = "لقد استخدمت المحاولتين المتاحة لك. تواصل مع المسؤول لمعرفة هل ربحت الجائزة أم لا 🎁";
-      } else {
+      }else{
         retryBtn.style.display = "block";
-        attemptsInfo.textContent = "يمكنك تجربة محاولة أخرى واحدة فقط. هذه كانت المحاولة رقم " + attempts + " من 2.";
+        attemptsInfo.textContent = "يمكنك تجربة محاولة أخرى واحدة فقط. هذه كانت المحاولة رقم "+attempts+" من 2.";
       }
     }
 
-    function restartQuiz() {
-      // إعادة من البداية مع زيادة المحاولة (محسوبة مسبقًا في endQuiz)
+    function restartQuiz(){
       showSection(startPage);
-      showAttemptMessage("تبقّت لك محاولة أخيرة للفوز بالجائزة 🎁");
     }
 
-    function sendWhatsApp() {
+    function sendWhatsApp(){
       const attemptNum = attempts;
       const total = questions.length;
-      const wrongText = wrongQuestions.length > 0
-        ? wrongQuestions.map(n => "س" + n).join(" – ")
+      const wrongText = wrongQuestions.length
+        ? wrongQuestions.map(n=>"س"+n).join(" – ")
         : "لا توجد أسئلة خاطئة ✅";
 
       const msg =
@@ -735,12 +356,7 @@
           : "🎁 يمكنك الاستفادة من المحاولة المتبقية لتحسين نتيجتك") +
         "\n\n🎉 كل عام وأنتم بخير 🎉";
 
-      const url =
-        "https://wa.me/" +
-        ORGANIZER_PHONE +
-        "?text=" +
-        encodeURIComponent(msg);
-
+      const url = "https://wa.me/" + ORGANIZER_PHONE + "?text=" + encodeURIComponent(msg);
       window.open(url, "_blank");
     }
   </script>
