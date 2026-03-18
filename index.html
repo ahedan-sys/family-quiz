@@ -2,53 +2,308 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>اختبار تجريبي</title>
+  <title>اختبار العائلة</title>
   <style>
-    body { font-family: Tahoma; margin: 20px; background: #f7f7f7; }
-    .question { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 8px; }
-    button { padding: 10px 20px; font-size: 18px; margin-top: 15px; }
-    #result { margin-top: 20px; font-size: 20px; font-weight: bold; }
+    body { font-family: Tahoma, sans-serif; margin: 15px; background:#f7f7f7; }
+    h1 { text-align:center; }
+    .question { background:#fff; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ddd; }
+    .q-title { font-weight:bold; margin-bottom:5px; }
+    button { padding:10px 20px; font-size:16px; margin-top:15px; }
+    #result, #highScore { margin-top:15px; font-size:18px; font-weight:bold; }
   </style>
 </head>
 <body>
 
-<h2>اختبار تجريبي (3 أسئلة)</h2>
+<h1>اختبار العائلة</h1>
 
 <form id="quizForm">
 
+  <!-- س1 -->
   <div class="question">
-    <p>س1: من أكثر واحد ينسى يقفل السيارة؟</p>
-    <label><input type="radio" name="q1" value="1"> محمد</label><br>
+    <div class="q-title">س1: من اكثر شخص سافر داخل المملكة وخارجها؟</div>
+    <label><input type="radio" name="q1" value="1"> اعتدال</label><br>
     <label><input type="radio" name="q1" value="2"> راشد</label><br>
-    <label><input type="radio" name="q1" value="3"> عبدالعزيز</label><br>
-    <label><input type="radio" name="q1" value="4"> جميع ماسبق</label>
+    <label><input type="radio" name="q1" value="3"> محمد</label><br>
+    <label><input type="radio" name="q1" value="4"> عبدالعزيز</label>
   </div>
 
+  <!-- س2 -->
   <div class="question">
-    <p>س2: من اللي جاه حالة إسهال في الشالية؟</p>
-    <label><input type="radio" name="q2" value="1"> أشواق</label><br>
-    <label><input type="radio" name="q2" value="2"> نورة</label><br>
-    <label><input type="radio" name="q2" value="3"> هيا</label><br>
-    <label><input type="radio" name="q2" value="4"> ذكرى</label>
+    <div class="q-title">س2: ماهي ابعد دولة من السعودية سافر لها؟</div>
+    <label><input type="radio" name="q2" value="1"> اعتدال</label><br>
+    <label><input type="radio" name="q2" value="2"> راشد</label><br>
+    <label><input type="radio" name="q2" value="3"> نورة</label><br>
+    <label><input type="radio" name="q2" value="4"> عبدالعزيز</label>
   </div>
 
+  <!-- س3 -->
   <div class="question">
-    <p>س3: من يحب البط؟</p>
-    <label><input type="radio" name="q3" value="1"> سليمان</label><br>
-    <label><input type="radio" name="q3" value="2"> خالد</label><br>
-    <label><input type="radio" name="q3" value="3"> فهد</label><br>
-    <label><input type="radio" name="q3" value="4"> بدر</label>
+    <div class="q-title">س3: من أكبر فرد في عائلتنا؟</div>
+    <label><input type="radio" name="q3" value="1"> راشد</label><br>
+    <label><input type="radio" name="q3" value="2"> محمد</label><br>
+    <label><input type="radio" name="q3" value="3"> هيا</label><br>
+    <label><input type="radio" name="q3" value="4"> طرفة</label>
+  </div>
+
+  <!-- س4 -->
+  <div class="question">
+    <div class="q-title">س4: ماهي المادة التي تطرد القطط من المكان؟</div>
+    <label><input type="radio" name="q4" value="1"> كربوهيدرات</label><br>
+    <label><input type="radio" name="q4" value="2"> كربونات الصوديوم</label><br>
+    <label><input type="radio" name="q4" value="3"> الملح البحري</label><br>
+    <label><input type="radio" name="q4" value="4"> النشادر</label>
+  </div>
+
+  <!-- س5 -->
+  <div class="question">
+    <div class="q-title">س5: من الشخص المعروف بحبّه الشديد الشاهي؟</div>
+    <label><input type="radio" name="q5" value="1"> راشد</label><br>
+    <label><input type="radio" name="q5" value="2"> محمد</label><br>
+    <label><input type="radio" name="q5" value="3"> عبدالرحمن محمد</label><br>
+    <label><input type="radio" name="q5" value="4"> سليمان</label>
+  </div>
+
+  <!-- س6 -->
+  <div class="question">
+    <div class="q-title">س6: أفراد العائلة تأخرًا عن المناسبات؟</div>
+    <label><input type="radio" name="q6" value="1"> نواف بن راشد</label><br>
+    <label><input type="radio" name="q6" value="2"> عبدالعزيز</label><br>
+    <label><input type="radio" name="q6" value="3"> أشواق</label><br>
+    <label><input type="radio" name="q6" value="4"> بدر بن محمد</label>
+  </div>
+
+  <!-- س7 -->
+  <div class="question">
+    <div class="q-title">س7: من أكثر أفراد العائلة متابعةً للمباريات الرياضية؟</div>
+    <label><input type="radio" name="q7" value="1"> خالد النعيمه</label><br>
+    <label><input type="radio" name="q7" value="2"> خالد المنصور</label><br>
+    <label><input type="radio" name="q7" value="3"> سليمان بن محمد</label><br>
+    <label><input type="radio" name="q7" value="4"> بدر بن محمد</label>
+  </div>
+
+  <!-- س8 -->
+  <div class="question">
+    <div class="q-title">س8: من هو الشخص الذي لايرد على رسائل القروب؟</div>
+    <label><input type="radio" name="q8" value="1"> سليمان</label><br>
+    <label><input type="radio" name="q8" value="2"> بدر</label><br>
+    <label><input type="radio" name="q8" value="3"> نواف</label><br>
+    <label><input type="radio" name="q8" value="4"> حمد</label>
+  </div>
+
+  <!-- س9 -->
+  <div class="question">
+    <div class="q-title">س9: من أكثر واحد ينسى يقفل السيارة؟</div>
+    <label><input type="radio" name="q9" value="1"> محمد</label><br>
+    <label><input type="radio" name="q9" value="2"> راشد</label><br>
+    <label><input type="radio" name="q9" value="3"> عبدالعزيز</label><br>
+    <label><input type="radio" name="q9" value="4"> جميع ماسبق</label>
+  </div>
+
+  <!-- س10 -->
+  <div class="question">
+    <div class="q-title">س10: من أخر من رزق بمولود/ة في العائلة؟</div>
+    <label><input type="radio" name="q10" value="1"> ذكرى</label><br>
+    <label><input type="radio" name="q10" value="2"> الهنوف</label><br>
+    <label><input type="radio" name="q10" value="3"> عبدالعزيز</label><br>
+    <label><input type="radio" name="q10" value="4"> حمد</label>
+  </div>
+
+  <!-- س11 -->
+  <div class="question">
+    <div class="q-title">س11: من ابعد منزل من بيت الجدة(طرفه)؟</div>
+    <label><input type="radio" name="q11" value="1"> محمد</label><br>
+    <label><input type="radio" name="q11" value="2"> عبدالعزيز</label><br>
+    <label><input type="radio" name="q11" value="3"> ذكرى</label><br>
+    <label><input type="radio" name="q11" value="4"> الهنوف</label>
+  </div>
+
+  <!-- س12 -->
+  <div class="question">
+    <div class="q-title">س12: ماهو الحي الذي لايوجد به حرامية؟</div>
+    <label><input type="radio" name="q12" value="1"> السويدي</label><br>
+    <label><input type="radio" name="q12" value="2"> النرجس</label><br>
+    <label><input type="radio" name="q12" value="3"> البديعة</label><br>
+    <label><input type="radio" name="q12" value="4"> الشفا</label>
+  </div>
+
+  <!-- س13 -->
+  <div class="question">
+    <div class="q-title">س13: من الشخص الذي لاتستطيع ان تكذب عليه ويسكت (مايسلك ويعطي بالوجه)؟</div>
+    <label><input type="radio" name="q13" value="1"> حمد</label><br>
+    <label><input type="radio" name="q13" value="2"> جوري</label><br>
+    <label><input type="radio" name="q13" value="3"> العنود</label><br>
+    <label><input type="radio" name="q13" value="4"> نورة</label>
+  </div>
+
+  <!-- س14 -->
+  <div class="question">
+    <div class="q-title">س14: من اكثر شخص يحب التصوير بالسناب؟</div>
+    <label><input type="radio" name="q14" value="1"> العنود</label><br>
+    <label><input type="radio" name="q14" value="2"> طرفة بنت راشد</label><br>
+    <label><input type="radio" name="q14" value="3"> اعتدال</label><br>
+    <label><input type="radio" name="q14" value="4"> أشواق</label>
+  </div>
+
+  <!-- س15 -->
+  <div class="question">
+    <div class="q-title">س15: من اكثر واحد يرسل في قروبات؟</div>
+    <label><input type="radio" name="q15" value="1"> راشد</label><br>
+    <label><input type="radio" name="q15" value="2"> هيا</label><br>
+    <label><input type="radio" name="q15" value="3"> محمد</label><br>
+    <label><input type="radio" name="q15" value="4"> سليمان</label>
+  </div>
+
+  <!-- س16 -->
+  <div class="question">
+    <div class="q-title">س16: من الذي ينام في أي مكان؟</div>
+    <label><input type="radio" name="q16" value="1"> حمد</label><br>
+    <label><input type="radio" name="q16" value="2"> راشد</label><br>
+    <label><input type="radio" name="q16" value="3"> هيا</label><br>
+    <label><input type="radio" name="q16" value="4"> عبدالعزيز</label>
+  </div>
+
+  <!-- س17 -->
+  <div class="question">
+    <div class="q-title">س17: من عراب اللاء ؟</div>
+    <label><input type="radio" name="q17" value="1"> راشد</label><br>
+    <label><input type="radio" name="q17" value="2"> محمد</label><br>
+    <label><input type="radio" name="q17" value="3"> عبدالعزيز</label><br>
+    <label><input type="radio" name="q17" value="4"> حمد</label>
+  </div>
+
+  <!-- س18 -->
+  <div class="question">
+    <div class="q-title">س18: من الذي مطفوق ويطاق مع العالم في السيارة؟</div>
+    <label><input type="radio" name="q18" value="1"> سليمان</label><br>
+    <label><input type="radio" name="q18" value="2"> أشواق</label><br>
+    <label><input type="radio" name="q18" value="3"> حمد</label><br>
+    <label><input type="radio" name="q18" value="4"> العنود</label>
+  </div>
+
+  <!-- س19 -->
+  <div class="question">
+    <div class="q-title">س19: من الشخص الذي يحب يتكشخ في جميع الأوقات؟</div>
+    <label><input type="radio" name="q19" value="1"> حمد</label><br>
+    <label><input type="radio" name="q19" value="2"> سليمان</label><br>
+    <label><input type="radio" name="q19" value="3"> نواف</label><br>
+    <label><input type="radio" name="q19" value="4"> عبدالرحمن بن محمد</label>
+  </div>
+
+  <!-- س20 -->
+  <div class="question">
+    <div class="q-title">س20: من اكثر شخص يشتري سيارات؟</div>
+    <label><input type="radio" name="q20" value="1"> محمد</label><br>
+    <label><input type="radio" name="q20" value="2"> راشد</label><br>
+    <label><input type="radio" name="q20" value="3"> عبدالعزيز</label><br>
+    <label><input type="radio" name="q20" value="4"> حمد</label>
+  </div>
+
+  <!-- س21 -->
+  <div class="question">
+    <div class="q-title">س21: من هو اللي يلبس كاب غالبًا؟</div>
+    <label><input type="radio" name="q21" value="1"> راشد</label><br>
+    <label><input type="radio" name="q21" value="2"> محمد</label><br>
+    <label><input type="radio" name="q21" value="3"> نواف</label><br>
+    <label><input type="radio" name="q21" value="4"> عبدالرحمن</label>
+  </div>
+
+  <!-- س22 -->
+  <div class="question">
+    <div class="q-title">س22: من اللي جاه حالة إسهال في الشالية؟</div>
+    <label><input type="radio" name="q22" value="1"> أشواق</label><br>
+    <label><input type="radio" name="q22" value="2"> نورة</label><br>
+    <label><input type="radio" name="q22" value="3"> هيا</label><br>
+    <label><input type="radio" name="q22" value="4"> ذكرى</label>
+  </div>
+
+  <!-- س23 -->
+  <div class="question">
+    <div class="q-title">س23: من اللي يخاف من مايكل جاكسون؟</div>
+    <label><input type="radio" name="q23" value="1"> ترف</label><br>
+    <label><input type="radio" name="q23" value="2"> جوري</label><br>
+    <label><input type="radio" name="q23" value="3"> عنود</label><br>
+    <label><input type="radio" name="q23" value="4"> عهود</label>
+  </div>
+
+  <!-- س24 -->
+  <div class="question">
+    <div class="q-title">س24: من اللي تتكلم برماوي؟</div>
+    <label><input type="radio" name="q24" value="1"> جوري</label><br>
+    <label><input type="radio" name="q24" value="2"> الهنوف</label><br>
+    <label><input type="radio" name="q24" value="3"> طرفة</label><br>
+    <label><input type="radio" name="q24" value="4"> العنود</label>
+  </div>
+
+  <!-- س25 -->
+  <div class="question">
+    <div class="q-title">س25: من اللي يصيح إذا شاف شايب؟</div>
+    <label><input type="radio" name="q25" value="1"> نورة</label><br>
+    <label><input type="radio" name="q25" value="2"> هيا</label><br>
+    <label><input type="radio" name="q25" value="3"> اعتدال</label><br>
+    <label><input type="radio" name="q25" value="4"> طرفة</label>
+  </div>
+
+  <!-- س26 -->
+  <div class="question">
+    <div class="q-title">س26: من اللي يحب أكل الفنادق؟</div>
+    <label><input type="radio" name="q26" value="1"> إبراهيم</label><br>
+    <label><input type="radio" name="q26" value="2"> وليد</label><br>
+    <label><input type="radio" name="q26" value="3"> بدر</label><br>
+    <label><input type="radio" name="q26" value="4"> سليمان</label>
+  </div>
+
+  <!-- س27 -->
+  <div class="question">
+    <div class="q-title">س27: من اللي ما ياكل أكل مسخّن أو بايت؟</div>
+    <label><input type="radio" name="q27" value="1"> حمد</label><br>
+    <label><input type="radio" name="q27" value="2"> سليمان</label><br>
+    <label><input type="radio" name="q27" value="3"> بدر</label><br>
+    <label><input type="radio" name="q27" value="4"> فهد</label>
+  </div>
+
+  <!-- س28 -->
+  <div class="question">
+    <div class="q-title">س28: من الذي لا يحب الأطفال؟</div>
+    <label><input type="radio" name="q28" value="1"> بدر</label><br>
+    <label><input type="radio" name="q28" value="2"> نواف</label><br>
+    <label><input type="radio" name="q28" value="3"> سليمان</label><br>
+    <label><input type="radio" name="q28" value="4"> عبدالله</label>
+  </div>
+
+  <!-- س29 -->
+  <div class="question">
+    <div class="q-title">س29: من اكثر شخص يحب ضرما؟</div>
+    <label><input type="radio" name="q29" value="1"> سليمان</label><br>
+    <label><input type="radio" name="q29" value="2"> بدر</label><br>
+    <label><input type="radio" name="q29" value="3"> محمد</label><br>
+    <label><input type="radio" name="q29" value="4"> شادي</label>
+  </div>
+
+  <!-- س30 -->
+  <div class="question">
+    <div class="q-title">س30: من يحب البط؟</div>
+    <label><input type="radio" name="q30" value="1"> سليمان</label><br>
+    <label><input type="radio" name="q30" value="2"> خالد</label><br>
+    <label><input type="radio" name="q30" value="3"> فهد</label><br>
+    <label><input type="radio" name="q30" value="4"> بدر</label>
   </div>
 
   <button type="button" onclick="gradeQuiz()">عرض النتيجة</button>
-  <button type="button" onclick="sendResult()">إرسال النتيجة عبر واتساب</button>
-
 </form>
 
 <div id="result"></div>
+<div id="highScore"></div>
 
 <script>
-  const answers = { q1: 4, q2: 1, q3: 4 };
+  // الأجوبة الصحيحة حسب الترتيب
+  const answers = {
+    q1: 4,  q2: 1,  q3: 4,  q4: 4,  q5: 2,
+    q6: 2,  q7: 1,  q8: 3,  q9: 2,  q10: 2,
+    q11: 2, q12: 2, q13: 4, q14: 3, q15: 3,
+    q16: 2, q17: 2, q18: 3, q19: 2, q20: 2,
+    q21: 4, q22: 1, q23: 4, q24: 1, q25: 4,
+    q26: 2, q27: 4, q28: 2, q29: 3, q30: 4
+  };
 
   function gradeQuiz() {
     let score = 0;
@@ -61,17 +316,22 @@
       }
     }
 
+    const total = Object.keys(answers).length;
     document.getElementById('result').textContent =
-      `نتيجتك: ${score} من 3`;
-  }
+      `نتيجتك: ${score} من ${total}`;
 
-  function sendResult() {
-    const resultText = document.getElementById('result').textContent;
-    const message = encodeURIComponent(resultText);
-    const url = `https://wa.me/966564009092?text=${message}`;
-    window.open(url, "_blank");
+    // أعلى نتيجة على نفس الجهاز (localStorage)
+    const key = 'family_quiz_highscore';
+    const prevHigh = Number(localStorage.getItem(key) || 0);
+    if (score > prevHigh) {
+      localStorage.setItem(key, score);
+    }
+    const high = Math.max(score, prevHigh);
+    document.getElementById('highScore').textContent =
+      `أعلى نتيجة تم تحقيقها على هذا الجهاز: ${high} من ${total}`;
   }
 </script>
 
 </body>
 </html>
+
