@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>اختبار تجريبي</title>
+  <style>
+    body { font-family: Tahoma; margin: 20px; background: #f7f7f7; }
+    .question { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 8px; }
+    button { padding: 10px 20px; font-size: 18px; margin-top: 15px; }
+    #result { margin-top: 20px; font-size: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<h2>اختبار تجريبي (3 أسئلة)</h2>
+
+<form id="quizForm">
+
+  <div class="question">
+    <p>س1: من أكثر واحد ينسى يقفل السيارة؟</p>
+    <label><input type="radio" name="q1" value="1"> محمد</label><br>
+    <label><input type="radio" name="q1" value="2"> راشد</label><br>
+    <label><input type="radio" name="q1" value="3"> عبدالعزيز</label><br>
+    <label><input type="radio" name="q1" value="4"> جميع ماسبق</label>
+  </div>
+
+  <div class="question">
+    <p>س2: من اللي جاه حالة إسهال في الشالية؟</p>
+    <label><input type="radio" name="q2" value="1"> أشواق</label><br>
+    <label><input type="radio" name="q2" value="2"> نورة</label><br>
+    <label><input type="radio" name="q2" value="3"> هيا</label><br>
+    <label><input type="radio" name="q2" value="4"> ذكرى</label>
+  </div>
+
+  <div class="question">
+    <p>س3: من يحب البط؟</p>
+    <label><input type="radio" name="q3" value="1"> سليمان</label><br>
+    <label><input type="radio" name="q3" value="2"> خالد</label><br>
+    <label><input type="radio" name="q3" value="3"> فهد</label><br>
+    <label><input type="radio" name="q3" value="4"> بدر</label>
+  </div>
+
+  <button type="button" onclick="gradeQuiz()">عرض النتيجة</button>
+  <button type="button" onclick="sendResult()">إرسال النتيجة عبر واتساب</button>
+
+</form>
+
+<div id="result"></div>
+
+<script>
+  const answers = { q1: 4, q2: 1, q3: 4 };
+
+  function gradeQuiz() {
+    let score = 0;
+    const form = document.getElementById('quizForm');
+
+    for (let q in answers) {
+      const selected = form.querySelector(`input[name="${q}"]:checked`);
+      if (selected && Number(selected.value) === answers[q]) {
+        score++;
+      }
+    }
+
+    document.getElementById('result').textContent =
+      `نتيجتك: ${score} من 3`;
+  }
+
+  function sendResult() {
+    const resultText = document.getElementById('result').textContent;
+    const message = encodeURIComponent(resultText);
+    const url = `https://wa.me/966564009092?text=${message}`;
+    window.open(url, "_blank");
+  }
+</script>
+
+</body>
+</html>
