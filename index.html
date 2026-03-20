@@ -138,6 +138,24 @@ input[type="text"] {
 
 <div class="container">
 
+  <!-- عبارة الترحيب -->
+  <div style="
+    text-align:center;
+    margin-bottom:20px;
+    padding:15px;
+    background:#1e293b;
+    border-radius:12px;
+    border:1px solid #334155;
+    color:#facc15;
+    font-size:1.3rem;
+    font-weight:bold;
+  ">
+    بشرف ماما طرفة
+    <div style="color:#a5f3fc; font-size:1rem; margin-top:6px;">
+      حياكم في داركم وفالكم الجائزة
+    </div>
+  </div>
+
   <!-- صفحة البداية -->
   <div id="startPage" class="section active">
     <label class="label">الاسم الأول</label>
@@ -155,16 +173,17 @@ input[type="text"] {
 
     <div class="timer-wrapper">
       <div class="timer-circle">
-        <div class="timer-inner" id="timerText">20</div>
+        <div class="timer-inner" id="timerText">1800</div>
       </div>
     </div>
 
-    <div class="small-note">لديك 20 ثانية للإجابة على كل سؤال</div>
+    <div class="small-note">لديك 30 دقيقة فقط لحل جميع الأسئلة</div>
 
     <div id="questionText" style="margin-top:15px; font-size:1.1rem;"></div>
     <div id="optionsContainer"></div>
 
     <button class="btn btn-primary" onclick="nextQuestion()">التالي</button>
+    <button class="btn btn-secondary" onclick="prevQuestion()">السابق</button>
   </div>
 
   <!-- صفحة النتيجة -->
@@ -222,15 +241,33 @@ const questions = [
 ];
 
 /* ============================
+      نظام المحاولتين
+============================ */
+let attempts = localStorage.getItem("attempts")
+  ? Number(localStorage.getItem("attempts"))
+  : 0;
+
+if (attempts >= 2) {
+  document.body.innerHTML = `
+    <div style="
+      text-align:center;
+      padding:40px;
+      font-size:1.3rem;
+      color:#f87171;
+    ">
+      لقد استنفدت جميع المحاولات من هذا الجهاز
+    </div>
+  `;
+}
+
+/* ============================
       متغيرات عامة
 ============================ */
 let currentQuestion = 0;
 let score = 0;
 let userAnswers = [];
 let timer;
-let timeLeft = 20;
-
-let attempts = localStorage.getItem("attempts") ? Number(localStorage.getItem("attempts")) : 0;
+let timeLeft = 1800; // 30 دقيقة
 
 /* ============================
       بدء الاختبار
@@ -304,7 +341,6 @@ function nextQuestion() {
 
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
-    resetTimer();
     loadQuestion();
   } else {
     finishQuiz();
@@ -312,26 +348,28 @@ function nextQuestion() {
 }
 
 /* ============================
-      التايمر
+      السابق
+============================ */
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    loadQuestion();
+  }
+}
+
+/* ============================
+      التايمر 30 دقيقة
 ============================ */
 function startTimer() {
-  timeLeft = 20;
-  document.getElementById("timerText").innerText = timeLeft;
-
   timer = setInterval(() => {
     timeLeft--;
     document.getElementById("timerText").innerText = timeLeft;
 
     if (timeLeft <= 0) {
       clearInterval(timer);
-      nextQuestion();
+      finishQuiz();
     }
   }, 1000);
-}
-
-function resetTimer() {
-  clearInterval(timer);
-  startTimer();
 }
 
 /* ============================
@@ -379,7 +417,7 @@ function sendWhatsApp() {
 ============================ */
 function restartQuiz() {
   if (attempts >= 2) {
-    alert("لقد استنفدت جميع المحاولات");
+    alert("لقد استنفدت جميع المحاولات من هذا الجهاز");
     return;
   }
   location.reload();
