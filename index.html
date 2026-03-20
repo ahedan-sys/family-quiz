@@ -304,23 +304,18 @@ function startQuiz() {
     return;
   }
 
-  // دمج الاسم الأول واسم الأب
   let fullName = first + " " + father;
 
-  // جلب قائمة الأسماء السابقة من الجهاز
   let usedNames = JSON.parse(localStorage.getItem("usedNames")) || [];
 
-  // التحقق من التكرار
   if (usedNames.includes(fullName)) {
     alert("هذا الاسم سبق أن شارك في المسابقة من هذا الجهاز");
     return;
   }
 
-  // إضافة الاسم للقائمة
   usedNames.push(fullName);
   localStorage.setItem("usedNames", JSON.stringify(usedNames));
 
-  // بدء الاختبار
   document.getElementById("startPage").classList.remove("active");
   document.getElementById("questionPage").classList.add("active");
 
@@ -411,8 +406,7 @@ function startTimer() {
     }
   }, 1000);
 }
-
-/* ============================
+  /* ============================
       إنهاء الاختبار
 ============================ */
 function finishQuiz() {
