@@ -1,364 +1,391 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>مسابقة العيد – عائلة اللحيدان</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0;font-family:"Tahoma",system-ui}
-    body{
-      min-height:100vh;display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,#0f172a,#1e293b,#0f766e);
-      background-size:300% 300%;animation:gradientMove 12s ease infinite;color:#f9fafb
-    }
-    @keyframes gradientMove{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    .overlay-pattern{
-      position:fixed;inset:0;pointer-events:none;opacity:.08;
-      background-image:
-        radial-gradient(circle at 10% 20%,#facc15 0,transparent 40%),
-        radial-gradient(circle at 80% 0%,#22c55e 0,transparent 45%),
-        radial-gradient(circle at 0% 80%,#38bdf8 0,transparent 40%);
-      mix-blend-mode:screen
-    }
-    .container{
-      width:100%;max-width:480px;background:rgba(15,23,42,.92);
-      border-radius:18px;padding:20px 18px 22px;
-      box-shadow:0 18px 45px rgba(0,0,0,.55);position:relative;overflow:hidden
-    }
-    .header{text-align:center;margin-bottom:16px;border-bottom:1px solid rgba(148,163,184,.4);padding-bottom:10px}
-    .header-title{font-size:1.3rem;font-weight:700;color:#facc15;margin-bottom:4px}
-    .header-sub{font-size:.9rem;color:#e5e7eb;margin-bottom:3px}
-    .header-special{font-size:.9rem;color:#f97316;font-weight:600;margin-bottom:3px}
-    .header-note{font-size:.85rem;color:#cbd5f5}
-    .section{display:none}
-    .section.active{display:block}
-    .label{font-size:.95rem;margin-bottom:6px;color:#e5e7eb}
-    input[type=text]{
-      width:100%;padding:10px 12px;border-radius:10px;border:1px solid #4b5563;
-      background:#020617;color:#f9fafb;font-size:.95rem;outline:none
-    }
-    input::placeholder{color:#6b7280}
-    .btn{
-      width:100%;margin-top:14px;padding:10px 12px;border-radius:999px;border:none;
-      font-size:.98rem;font-weight:600;cursor:pointer;
-      transition:transform .15s ease,box-shadow .15s ease,background .15s ease
-    }
-    .btn-primary{
-      background:linear-gradient(135deg,#22c55e,#16a34a);color:#022c22;
-      box-shadow:0 10px 25px rgba(34,197,94,.35)
-    }
-    .btn-secondary{background:#0f172a;color:#e5e7eb;border:1px solid #4b5563}
-    .info-box{
-      margin-top:10px;padding:10px 12px;border-radius:12px;
-      background:rgba(15,118,110,.15);border:1px solid rgba(45,212,191,.4);
-      font-size:.85rem;color:#e0f2fe
-    }
-    .question-text{font-size:1rem;font-weight:600;margin-bottom:10px;color:#f9fafb}
-    .options{margin-top:8px}
-    .option{margin-bottom:8px}
-    .option input{margin-left:6px;transform:scale(1.1)}
-    .option label{font-size:.95rem;color:#e5e7eb;cursor:pointer}
-    .question-meta{
-      display:flex;justify-content:space-between;align-items:center;
-      font-size:.8rem;color:#9ca3af;margin-bottom:8px
-    }
-    .timer-wrapper{display:flex;justify-content:center;margin:10px 0 6px}
-    .timer-circle{
-      width:70px;height:70px;border-radius:50%;border:4px solid rgba(148,163,184,.4);
-      display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden
-    }
-    .timer-fill{
-      position:absolute;inset:0;border-radius:50%;
-      background:conic-gradient(#22c55e var(--deg,0deg),transparent 0deg);z-index:1
-    }
-    .timer-inner{
-      position:relative;z-index:2;width:52px;height:52px;border-radius:50%;
-      background:#020617;display:flex;align-items:center;justify-content:center;
-      font-size:.9rem;color:#e5e7eb;font-weight:600
-    }
-    .result-title{
-      font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:8px;color:#facc15
-    }
-    .result-score{text-align:center;font-size:1rem;margin-bottom:6px;white-space:pre-line}
-    .wrong-list{margin-top:6px;font-size:.9rem;color:#fecaca}
-    .attempts-info{margin-top:10px;font-size:.85rem;color:#cbd5f5;text-align:center}
-    .small-note{margin-top:6px;font-size:.8rem;color:#9ca3af;text-align:center}
-  </style>
+<meta charset="UTF-8" />
+<title>مسابقة العيد – عائلة اللحيدان</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Tahoma", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b, #0f766e);
+  background-size: 300% 300%;
+  animation: gradientMove 12s ease infinite;
+  color: #f9fafb;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(15, 23, 42, 0.92);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+.label {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #e5e7eb;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #4b5563;
+  background: #020617;
+  color: #f9fafb;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #022c22;
+}
+
+.btn-secondary {
+  background: #0f172a;
+  color: #e5e7eb;
+  border: 1px solid #4b5563;
+}
+
+.option {
+  padding: 12px;
+  margin-top: 10px;
+  background: #0f172a;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #334155;
+}
+
+.option:hover {
+  background: #1e293b;
+}
+
+.timer-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.timer-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 6px solid #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-inner {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.result-title {
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #facc15;
+}
+
+.result-score {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.wrong-list {
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #fca5a5;
+}
+</style>
 </head>
+
 <body>
-  <div class="overlay-pattern"></div>
 
-  <div class="container">
-    <div class="header">
-      <div class="header-title">🎉 مسابقة العيد – عائلة اللحيدان 🎉</div>
-      <div class="header-sub">مرحبًا بضيوفنا الكرام… وكل عام وأنتم بخير</div>
-      <div class="header-special">بشرف حضور ماما طرفة ❤️</div>
-      <div class="header-note">نورتوا المسابقة ونتمنى لكم حظًا موفقًا في الفوز بالجائزة 🎁</div>
-    </div>
+<div class="container">
 
-    <!-- صفحة البداية -->
-    <div id="startPage" class="section active">
-      <div class="label">ادخل اسمك لبدء المسابقة:</div>
-      <input type="text" id="playerName" placeholder="مثال: محمد بن عبدالله" />
+  <!-- صفحة البداية -->
+  <div id="startPage" class="section active">
+    <label class="label">الاسم الأول</label>
+    <input type="text" id="firstName" placeholder="اكتب اسمك">
 
-      <div class="info-box">
-        <strong>تنبيه مهم 🎁</strong><br />
-        لديك <strong>محاولتان فقط</strong> للفوز بالجائزة.<br />
-        سيتم إرسال نتيجة كل محاولة إلى منظم المسابقة عبر الواتساب.
-      </div>
+    <label class="label" style="margin-top:10px;">اسم الأب</label>
+    <input type="text" id="fatherName" placeholder="اكتب اسم الأب">
 
-      <button class="btn btn-primary" onclick="startQuiz()">ابدأ المسابقة</button>
-    </div>
-
-    <!-- صفحة السؤال -->
-    <div id="questionPage" class="section">
-      <div class="question-meta">
-        <div id="questionNumber"></div>
-        <div id="attemptLabel"></div>
-      </div>
-
-      <div class="timer-wrapper">
-        <div class="timer-circle">
-          <div class="timer-fill" id="timerFill"></div>
-          <div class="timer-inner" id="timerText">20</div>
-        </div>
-      </div>
-      <div class="small-note">لديك 20 ثانية للإجابة على كل سؤال</div>
-
-      <div class="question-text" id="questionText"></div>
-      <div class="options" id="optionsContainer"></div>
-
-      <button class="btn btn-primary" onclick="nextQuestion()">السؤال التالي</button>
-    </div>
-
-    <!-- صفحة النتيجة -->
-    <div id="resultPage" class="section">
-      <div class="result-title">🌙✨ نتيجة اختبار العيد ✨🌙</div>
-      <div class="result-score" id="resultScore"></div>
-      <div class="wrong-list" id="wrongList"></div>
-
-      <button class="btn btn-primary" onclick="sendWhatsApp()">إرسال النتيجة بالواتساب</button>
-      <button id="retryBtn" class="btn btn-secondary" onclick="restartQuiz()">🔄 محاولة أخرى</button>
-
-      <div class="attempts-info" id="attemptsInfo"></div>
-      <div class="small-note">بعد استنفاد المحاولتين لن تتمكن من إعادة المسابقة من نفس الجهاز.</div>
-    </div>
+    <button class="btn btn-primary" onclick="startQuiz()">ابدأ الاختبار</button>
   </div>
 
-  <script>
-    const ORGANIZER_PHONE = "966564009092";
+  <!-- صفحة الأسئلة -->
+  <div id="questionPage" class="section">
+    <div id="questionNumber"></div>
 
-    // أسئلتك الـ 30 بالضبط
-    const questions = [
-      { q: "من اكثر شخص سافر داخل المملكة وخارجها؟", options: ["اعتدال","راشد","محمد","عبدالعزيز"], correct: 3 },
-      { q: "ماهي ابعد دولة من السعودية سافر لها؟", options: ["اعتدال","راشد","نورة","عبدالعزيز"], correct: 0 },
-      { q: "من أكبر فرد في عائلتنا؟", options: ["راشد","محمد","هيا","طرفة"], correct: 3 },
-      { q: "ماهي المادة التي تطرد القطط من المكان؟", options: ["كربوهيدرات","كربونات الصوديوم","الملح البحري","النشادر"], correct: 3 },
-      { q: "من الشخص المعروف بحبّه الشديد للشاهي؟", options: ["راشد","محمد","عبدالرحمن محمد","سليمان"], correct: 1 },
-      { q: "أفراد العائلة تأخرًا عن المناسبات؟", options: ["نواف بن راشد","عبدالعزيز","أشواق","بدر بن محمد"], correct: 1 },
-      { q: "من أكثر أفراد العائلة متابعةً للمباريات الرياضية؟", options: ["خالد النعيمه","خالد المنصور","سليمان بن محمد","بدر بن محمد"], correct: 0 },
-      { q: "من هو الشخص الذي لا يرد على رسائل القروب؟", options: ["سليمان","بدر","نواف","حمد"], correct: 2 },
-      { q: "من أكثر واحد ينسى يقفل السيارة؟", options: ["محمد","راشد","عبدالعزيز","جميع ما سبق"], correct: 1 },
-      { q: "من آخر من رزق بمولود/ة في العائلة؟", options: ["ذكرى","الهنوف","عبدالعزيز","حمد"], correct: 1 },
-      { q: "من أبعد منزل عن بيت الجدة (طرفة)؟", options: ["محمد","عبدالعزيز","ذكرى","الهنوف"], correct: 1 },
-      { q: "ماهو الحي الذي لا يوجد به حرامية؟", options: ["السويدي","النرجس","البديعة","الشفا"], correct: 1 },
-      { q: "من الشخص الذي لا تستطيع أن تكذب عليه ويسكت؟", options: ["حمد","جوري","العنود","نورة"], correct: 3 },
-      { q: "من أكثر شخص يحب التصوير بالسناب؟", options: ["العنود","طرفة بنت راشد","اعتدال","أشواق"], correct: 2 },
-      { q: "من أكثر واحد يرسل في القروبات؟", options: ["راشد","هيا","محمد","سليمان"], correct: 2 },
-      { q: "من الذي ينام في أي مكان؟", options: ["حمد","راشد","هيا","عبدالعزيز"], correct: 1 },
-      { q: "من عرّاب اللاء؟", options: ["راشد","محمد","عبدالعزيز","حمد"], correct: 1 },
-      { q: "من الذي مطفوق ويطاق مع العالم في السيارة؟", options: ["سليمان","أشواق","حمد","العنود"], correct: 2 },
-      { q: "من الشخص الذي يحب يتكشخ في جميع الأوقات؟", options: ["حمد","سليمان","نواف","عبدالرحمن بن محمد"], correct: 1 },
-      { q: "من أكثر شخص يشتري سيارات؟", options: ["محمد","راشد","عبدالعزيز","حمد"], correct: 1 },
-      { q: "من هو اللي يلبس كاب غالبًا؟", options: ["راشد","محمد","نواف","عبدالرحمن"], correct: 3 },
-      { q: "من اللي جاه حالة إسهال في الشالية؟", options: ["أشواق","نورة","هيا","ذكرى"], correct: 0 },
-      { q: "من اللي يخاف من مايكل جاكسون؟", options: ["ترف","جوري","عنود","عهود"], correct: 3 },
-      { q: "من اللي تتكلم برماوي؟", options: ["جوري","الهنوف","طرفة","العنود"], correct: 0 },
-      { q: "من اللي يصيح إذا شاف شايب؟", options: ["نورة","هيا","اعتدال","طرفة"], correct: 3 },
-      { q: "من اللي يحب أكل الفنادق؟", options: ["إبراهيم","وليد","بدر","سليمان"], correct: 1 },
-      { q: "من اللي ما ياكل أكل مسخّن أو بايت؟", options: ["حمد","سليمان","بدر","فهد"], correct: 3 },
-      { q: "من الذي لا يحب الأطفال؟", options: ["بدر","نواف","سليمان","عبدالله"], correct: 1 },
-      { q: "من أكثر شخص يحب ضرما؟", options: ["سليمان","بدر","محمد","شادي"], correct: 2 },
-      { q: "من يحب البط؟", options: ["سليمان","خالد","فهد","بدر"], correct: 3 }
-    ];
+    <div class="timer-wrapper">
+      <div class="timer-circle">
+        <div class="timer-inner" id="timerText">20</div>
+      </div>
+    </div>
 
-    let currentIndex = 0;
-    let score = 0;
-    let wrongQuestions = [];
-    let timer;
-    let timeLeft = 20;
-    let attempts = Number(localStorage.getItem("lh_eid_attempts") || 0);
-    let currentAttempt = attempts + 1;
-    let playerName = "";
+    <div class="small-note">لديك 20 ثانية للإجابة على كل سؤال</div>
 
-    const startPage = document.getElementById("startPage");
-    const questionPage = document.getElementById("questionPage");
-    const resultPage = document.getElementById("resultPage");
-    const questionText = document.getElementById("questionText");
-    const optionsContainer = document.getElementById("optionsContainer");
-    const questionNumber = document.getElementById("questionNumber");
-    const attemptLabel = document.getElementById("attemptLabel");
-    const timerText = document.getElementById("timerText");
-    const timerFill = document.getElementById("timerFill");
-    const resultScore = document.getElementById("resultScore");
-    const wrongList = document.getElementById("wrongList");
-    const attemptsInfo = document.getElementById("attemptsInfo");
-    const retryBtn = document.getElementById("retryBtn");
+    <div id="questionText" style="margin-top:15px; font-size:1.1rem;"></div>
+    <div id="optionsContainer"></div>
 
-    function showSection(section){
-      [startPage,questionPage,resultPage].forEach(s=>s.classList.remove("active"));
-      section.classList.add("active");
+    <button class="btn btn-primary" onclick="nextQuestion()">التالي</button>
+  </div>
+
+  <!-- صفحة النتيجة -->
+  <div id="resultPage" class="section">
+    <div class="result-title">🌙✨ نتيجة اختبار العيد ✨🌙</div>
+    <div class="result-score" id="resultScore"></div>
+    <div class="wrong-list" id="wrongList"></div>
+
+    <button class="btn btn-primary" onclick="sendWhatsApp()">إرسال النتيجة بالواتساب</button>
+
+    <button class="btn btn-secondary" onclick="restartQuiz()">🔄 محاولة أخرى</button>
+
+    <div id="attemptsInfo" style="margin-top:10px; text-align:center;"></div>
+  </div>
+
+</div>
+
+<script>
+/* ============================
+      الأسئلة (32 سؤال)
+============================ */
+const questions = [
+  { q: "من اكثر شخص سافر داخل المملكة وخارجها؟", options: ["اعتدال","راشد","محمد","عبدالعزيز"], answer: 4 },
+  { q: "ماهي ابعد دولة من السعودية سافر لها؟", options: ["اعتدال","راشد","نورة","عبدالعزيز"], answer: 1 },
+  { q: "من أكبر فرد في عائلتنا؟", options: ["راشد","محمد","هيا","طرفة"], answer: 4 },
+  { q: "ماهي المادة التي تطرد القطط من المكان؟", options: ["كربوهيدرات","كربونات الصوديوم","الملح البحري","النشادر"], answer: 4 },
+  { q: "من الشخص المعروف بحبّه الشديد للشاهي؟", options: ["راشد","محمد","عبدالرحمن محمد","سليمان"], answer: 2 },
+  { q: "أفراد العائلة تأخرًا عن المناسبات؟", options: ["نواف بن راشد","عبدالعزيز","أشواق","بدر بن محمد"], answer: 2 },
+  { q: "من أكثر أفراد العائلة متابعةً للمباريات الرياضية؟", options: ["خالد النعيمه","خالد المنصور","سليمان بن محمد","بدر بن محمد"], answer: 1 },
+  { q: "من هو الشخص الذي لا يرد على رسائل القروب؟", options: ["سليمان","بدر","نواف","حمد"], answer: 3 },
+  { q: "من أكثر واحد ينسى يقفل السيارة؟", options: ["محمد","راشد","عبدالعزيز","جميع ما سبق"], answer: 2 },
+  { q: "من آخر من رزق بمولود/ة في العائلة؟", options: ["ذكرى","الهنوف","عبدالعزيز","حمد"], answer: 2 },
+  { q: "من أبعد منزل عن بيت الجدة (طرفة)؟", options: ["محمد","عبدالعزيز","ذكرى","الهنوف"], answer: 2 },
+  { q: "ماهو الحي الذي لا يوجد به حرامية؟", options: ["السويدي","النرجس","البديعة","الشفا"], answer: 2 },
+  { q: "من هو اللي ما يعرف يكذب ولا يسلك ولا يجامل؟", options: ["حمد","جوري","العنود","نورة"], answer: 4 },
+  { q: "من أكثر شخص يحب التصوير بالسناب؟", options: ["العنود","طرفة بنت راشد","اعتدال","أشواق"], answer: 3 },
+  { q: "من أكثر واحد يرسل في القروبات؟", options: ["راشد","هيا","محمد","سليمان"], answer: 3 },
+  { q: "من الذي ينام في أي مكان؟", options: ["حمد","راشد","هيا","عبدالعزيز"], answer: 2 },
+  { q: "من عرّاب اللاء؟", options: ["راشد","محمد","عبدالعزيز","حمد"], answer: 2 },
+  { q: "من الذي مطفوق ويطاق مع العالم في السيارة؟", options: ["سليمان","أشواق","حمد","العنود"], answer: 3 },
+  { q: "من صاحب اكبر قدم في العائلة؟", options: ["حمد","سليمان","نواف","عبدالرحمن بن محمد"], answer: 2 },
+  { q: "من أكثر شخص يشتري سيارات؟", options: ["محمد","راشد","عبدالعزيز","حمد"], answer: 2 },
+  { q: "من هو اللي يلبس كاب غالبًا؟", options: ["راشد","محمد","نواف","عبدالرحمن"], answer: 4 },
+  { q: "من اللي جاه حالة إسهال في الشالية؟", options: ["أشواق","نورة","هيا","ذكرى"], answer: 1 },
+  { q: "من اللي يخاف من مايكل جاكسون؟", options: ["ترف","جوري","عنود","عهود"], answer: 4 },
+  { q: "من اللي تتكلم برماوي؟", options: ["جوري","الهنوف","طرفة","العنود"], answer: 1 },
+  { q: "من اللي يصيح إذا شاف شايب؟", options: ["نورة","هيا","اعتدال","طرفة"], answer: 4 },
+  { q: "من اللي يحب أكل الفنادق؟", options: ["إبراهيم","وليد","بدر","سليمان"], answer: 2 },
+  { q: "من اللي ما ياكل أكل مسخّن أو بايت؟", options: ["حمد","سليمان","بدر","فهد"], answer: 4 },
+  { q: "من الذي لا يحب الأطفال؟", options: ["بدر","نواف","سليمان","عبدالله"], answer: 2 },
+  { q: "من أكثر شخص يحب ضرما؟", options: ["سليمان","بدر","محمد","شادي"], answer: 3 },
+  { q: "من يحب البط؟", options: ["سليمان","خالد","فهد","بدر"], answer: 4 },
+  { q: "من اكثر فلاقات وجروح وكسور في العائلة؟", options: ["بدر","حمد","صالح باقازي","عبدالرحمن"], answer: 4 },
+  { q: "من يحب السيارات؟", options: ["عساف وعبدالرحمن","وليد وفهد","سليمان وبدر","نواف وعبدالله"], answer: 1 }
+];
+
+/* ============================
+      متغيرات عامة
+============================ */
+let currentQuestion = 0;
+let score = 0;
+let userAnswers = [];
+let timer;
+let timeLeft = 20;
+
+let attempts = localStorage.getItem("attempts") ? Number(localStorage.getItem("attempts")) : 0;
+
+/* ============================
+      بدء الاختبار
+============================ */
+function startQuiz() {
+  let first = document.getElementById("firstName").value.trim();
+  let father = document.getElementById("fatherName").value.trim();
+
+  if (first === "" || father === "") {
+    alert("الرجاء إدخال الاسم الأول واسم الأب");
+    return;
+  }
+
+  document.getElementById("startPage").classList.remove("active");
+  document.getElementById("questionPage").classList.add("active");
+
+  loadQuestion();
+  startTimer();
+}
+
+/* ============================
+      تحميل السؤال
+============================ */
+function loadQuestion() {
+  const q = questions[currentQuestion];
+
+  document.getElementById("questionNumber").innerText =
+    `السؤال ${currentQuestion + 1} من ${questions.length}`;
+
+  document.getElementById("questionText").innerText = q.q;
+
+  let html = "";
+  q.options.forEach((opt, i) => {
+    html += `
+      <div class="option" onclick="selectOption(${i + 1})" id="opt${i + 1}">
+        ${opt}
+      </div>
+    `;
+  });
+
+  document.getElementById("optionsContainer").innerHTML = html;
+
+  if (userAnswers[currentQuestion]) {
+    highlightSelected(userAnswers[currentQuestion]);
+  }
+}
+
+/* ============================
+      اختيار إجابة
+============================ */
+function selectOption(num) {
+  userAnswers[currentQuestion] = num;
+  highlightSelected(num);
+}
+
+function highlightSelected(num) {
+  for (let i = 1; i <= 4; i++) {
+    document.getElementById("opt" + i).style.background = "#0f172a";
+  }
+  document.getElementById("opt" + num).style.background = "#16a34a";
+}
+
+/* ============================
+      التالي
+============================ */
+function nextQuestion() {
+  if (!userAnswers[currentQuestion]) {
+    alert("الرجاء اختيار إجابة");
+    return;
+  }
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    resetTimer();
+    loadQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+/* ============================
+      التايمر
+============================ */
+function startTimer() {
+  timeLeft = 20;
+  document.getElementById("timerText").innerText = timeLeft;
+
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timerText").innerText = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      nextQuestion();
     }
+  }, 1000);
+}
 
-    function startQuiz(){
-      playerName = document.getElementById("playerName").value.trim();
-      if(!playerName){ alert("من فضلك أدخل اسمك أولاً."); return; }
+function resetTimer() {
+  clearInterval(timer);
+  startTimer();
+}
 
-      attempts = Number(localStorage.getItem("lh_eid_attempts") || 0);
-      if(attempts >= 2){
-        alert("لقد استخدمت المحاولتين المتاحة لك من هذا الجهاز.");
-        return;
-      }
+/* ============================
+      إنهاء الاختبار
+============================ */
+function finishQuiz() {
+  clearInterval(timer);
 
-      currentAttempt = attempts + 1;
-      currentIndex = 0;
-      score = 0;
-      wrongQuestions = [];
+  score = 0;
+  let wrongHTML = "";
 
-      showSection(questionPage);
-      loadQuestion();
-      startTimer();
+  questions.forEach((q, i) => {
+    if (userAnswers[i] === q.answer) {
+      score++;
+    } else {
+      wrongHTML += `<div>❌ سؤال ${i + 1}: الإجابة الصحيحة هي: ${q.options[q.answer - 1]}</div>`;
     }
+  });
 
-    function loadQuestion(){
-      if(currentIndex >= questions.length){ endQuiz(); return; }
+  document.getElementById("questionPage").classList.remove("active");
+  document.getElementById("resultPage").classList.add("active");
 
-      const qObj = questions[currentIndex];
-      questionNumber.textContent = `السؤال ${currentIndex+1} من ${questions.length}`;
-      attemptLabel.textContent = `المحاولة ${currentAttempt} من 2`;
-      questionText.textContent = qObj.q;
+  document.getElementById("resultScore").innerText =
+    `نتيجتك: ${score} من ${questions.length}`;
 
-      optionsContainer.innerHTML = "";
-      qObj.options.forEach((opt,idx)=>{
-        const div = document.createElement("div");
-        div.className = "option";
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = "option";
-        input.id = "opt"+idx;
-        input.value = idx;
-        const label = document.createElement("label");
-        label.htmlFor = "opt"+idx;
-        label.textContent = opt;
-        div.appendChild(input);
-        div.appendChild(label);
-        optionsContainer.appendChild(div);
-      });
+  document.getElementById("wrongList").innerHTML = wrongHTML;
 
-      resetTimer();
-    }
+  attempts++;
+  localStorage.setItem("attempts", attempts);
 
-    function getSelectedOption(){
-      const radios = document.querySelectorAll('input[name="option"]');
-      for(const r of radios){ if(r.checked) return Number(r.value); }
-      return null;
-    }
+  document.getElementById("attemptsInfo").innerText =
+    `هذه كانت محاولتك رقم ${attempts} من 2`;
+}
 
-    function nextQuestion(){
-      evaluateAnswer();
-      currentIndex++;
-      if(currentIndex < questions.length) loadQuestion();
-      else endQuiz();
-    }
+/* ============================
+      واتساب
+============================ */
+function sendWhatsApp() {
+  const msg = `نتيجة اختبار العيد:\nالنتيجة: ${score} من ${questions.length}`;
+  window.open(`https://wa.me/966564009092?text=${encodeURIComponent(msg)}`);
+}
 
-    function evaluateAnswer(){
-      const selected = getSelectedOption();
-      const correctIndex = questions[currentIndex].correct;
-      if(selected === correctIndex) score++;
-      else wrongQuestions.push(currentIndex+1);
-      stopTimer();
-    }
+/* ============================
+      إعادة المحاولة
+============================ */
+function restartQuiz() {
+  if (attempts >= 2) {
+    alert("لقد استنفدت جميع المحاولات");
+    return;
+  }
+  location.reload();
+}
 
-    function startTimer(){
-      timeLeft = 20;
-      updateTimerUI();
-      timer = setInterval(()=>{
-        timeLeft--;
-        updateTimerUI();
-        if(timeLeft <= 0){
-          wrongQuestions.push(currentIndex+1);
-          stopTimer();
-          currentIndex++;
-          if(currentIndex < questions.length) loadQuestion();
-          else endQuiz();
-        }
-      },1000);
-    }
+</script>
 
-    function resetTimer(){ stopTimer(); startTimer(); }
-    function stopTimer(){ if(timer) clearInterval(timer); }
-
-    function updateTimerUI(){
-      timerText.textContent = timeLeft;
-      const deg = (1 - timeLeft/20)*360;
-      timerFill.style.setProperty("--deg",deg+"deg");
-    }
-
-    function endQuiz(){
-      stopTimer();
-      attempts = Number(localStorage.getItem("lh_eid_attempts") || 0);
-      attempts++;
-      localStorage.setItem("lh_eid_attempts", attempts);
-
-      showSection(resultPage);
-
-      resultScore.textContent =
-        `👤 الاسم: ${playerName}\n📌 المحاولة: ${attempts} من 2\n📊 الدرجة: ${score} / ${questions.length}`;
-
-      if(wrongQuestions.length > 0){
-        wrongList.textContent = "❌ الأسئلة الخاطئة: " + wrongQuestions.map(n=>"س"+n).join(" – ");
-      }else{
-        wrongList.textContent = "ما شاء الله! أجبت على جميع الأسئلة بشكل صحيح ✅";
-      }
-
-      if(attempts >= 2){
-        retryBtn.style.display = "none";
-        attemptsInfo.textContent = "لقد استخدمت المحاولتين المتاحة لك. تواصل مع المسؤول لمعرفة هل ربحت الجائزة أم لا 🎁";
-      }else{
-        retryBtn.style.display = "block";
-        attemptsInfo.textContent = "يمكنك تجربة محاولة أخرى واحدة فقط. هذه كانت المحاولة رقم "+attempts+" من 2.";
-      }
-    }
-
-    function restartQuiz(){
-      showSection(startPage);
-    }
-
-    function sendWhatsApp(){
-      const attemptNum = attempts;
-      const total = questions.length;
-      const wrongText = wrongQuestions.length
-        ? wrongQuestions.map(n=>"س"+n).join(" – ")
-        : "لا توجد أسئلة خاطئة ✅";
-
-      const msg =
-        "🌙✨ نتيجة اختبار العيد ✨🌙\n\n" +
-        "👤 الاسم: " + playerName + "\n" +
-        "📌 المحاولة: " + attemptNum + " من 2\n" +
-        "📊 الدرجة: " + score + " / " + total + "\n\n" +
-        "❌ الأسئلة الخاطئة:\n" + wrongText + "\n\n" +
-        (attemptNum >= 2
-          ? "🎁 انتهت محاولاتك… تواصل مع المسؤول لمعرفة هل ربحت الجائزة أم لا"
-          : "🎁 يمكنك الاستفادة من المحاولة المتبقية لتحسين نتيجتك") +
-        "\n\n🎉 كل عام وأنتم بخير 🎉";
-
-      const url = "https://wa.me/" + ORGANIZER_PHONE + "?text=" + encodeURIComponent(msg);
-      window.open(url, "_blank");
-    }
-  </script>
 </body>
 </html>
