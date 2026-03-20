@@ -153,7 +153,6 @@ input[type="text"] {
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
@@ -225,7 +224,6 @@ input[type="text"] {
   </div>
 
 </div>
-
 <script>
 /* ============================
       الأسئلة (32 سؤال)
@@ -437,4 +435,42 @@ function finishQuiz() {
   document.getElementById("resultScore").innerText =
     `نتيجتك: ${score} من ${questions.length}`;
 
-  document
+  document.getElementById("wrongList").innerHTML = wrongHTML;
+
+  attempts++;
+  localStorage.setItem("attempts", attempts);
+
+  document.getElementById("attemptsInfo").innerText =
+    `هذه كانت محاولتك رقم ${attempts} من 2`;
+
+  /* منع الرجوع بعد النتيجة */
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    history.go(1);
+  };
+}
+
+/* ============================
+      واتساب
+============================ */
+function sendWhatsApp() {
+  const msg = `نتيجة اختبار العيد:\nالنتيجة: ${score} من ${questions.length}`;
+  const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+}
+
+/* ============================
+      إعادة المحاولة
+============================ */
+function restartQuiz() {
+  if (attempts >= 2) {
+    alert("لقد استنفدت جميع المحاولات");
+    return;
+  }
+
+  location.reload();
+}
+</script>
+
+</body>
+</html>
