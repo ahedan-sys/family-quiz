@@ -306,6 +306,23 @@ function startQuiz() {
     return;
   }
 
+  // دمج الاسم الأول واسم الأب
+  let fullName = first + " " + father;
+
+  // جلب قائمة الأسماء السابقة من الجهاز
+  let usedNames = JSON.parse(localStorage.getItem("usedNames")) || [];
+
+  // التحقق من التكرار
+  if (usedNames.includes(fullName)) {
+    alert("هذا الاسم سبق أن شارك في المسابقة من هذا الجهاز");
+    return;
+  }
+
+  // إضافة الاسم للقائمة
+  usedNames.push(fullName);
+  localStorage.setItem("usedNames", JSON.stringify(usedNames));
+
+  // بدء الاختبار
   document.getElementById("startPage").classList.remove("active");
   document.getElementById("questionPage").classList.add("active");
 
@@ -420,23 +437,4 @@ function finishQuiz() {
   document.getElementById("resultScore").innerText =
     `نتيجتك: ${score} من ${questions.length}`;
 
-  document.getElementById("wrongList").innerHTML = wrongHTML;
-
-  attempts++;
-  localStorage.setItem("attempts", attempts);
-
-  document.getElementById("attemptsInfo").innerText =
-    `هذه كانت محاولتك رقم ${attempts} من 2`;
-
-  /* منع الرجوع بعد النتيجة */
-  history.pushState(null, null, location.href);
-  window.onpopstate = function () {
-    history.go(1);
-  };
-}
-
-/* ============================
-      واتساب
-============================ */
-function sendWhatsApp() {
-  const msg = `نتيجة اختبار العيد:\nالنتيجة: ${score
+  document
