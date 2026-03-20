@@ -42,6 +42,26 @@ body {
 .section { display: none; }
 .section.active { display: block; }
 
+/* مفرقعات العيد */
+.fireworks {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.fireworks span {
+  margin: 0 4px;
+  animation: pop 1.2s infinite ease-in-out;
+}
+.fireworks span:nth-child(1) { color: #facc15; animation-delay: 0s; }
+.fireworks span:nth-child(2) { color: #2dd4bf; animation-delay: 0.2s; }
+.fireworks span:nth-child(3) { color: #facc15; animation-delay: 0.4s; }
+
+@keyframes pop {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
 .label {
   font-size: 0.95rem;
   margin-bottom: 6px;
@@ -137,6 +157,11 @@ input[type="text"] {
 <body>
 
 <div class="container">
+
+  <!-- مفرقعات العيد -->
+  <div class="fireworks">
+    <span>✨</span><span>🎉</span><span>✨</span>
+  </div>
 
   <!-- عبارة الترحيب -->
   <div style="
@@ -402,28 +427,16 @@ function finishQuiz() {
 
   document.getElementById("attemptsInfo").innerText =
     `هذه كانت محاولتك رقم ${attempts} من 2`;
+
+  /* منع الرجوع بعد النتيجة */
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    history.go(1);
+  };
 }
 
 /* ============================
       واتساب
 ============================ */
 function sendWhatsApp() {
-  const msg = `نتيجة اختبار العيد:\nالنتيجة: ${score} من ${questions.length}`;
-  window.open(`https://wa.me/966564009092?text=${encodeURIComponent(msg)}`);
-}
-
-/* ============================
-      إعادة المحاولة
-============================ */
-function restartQuiz() {
-  if (attempts >= 2) {
-    alert("لقد استنفدت جميع المحاولات من هذا الجهاز");
-    return;
-  }
-  location.reload();
-}
-
-</script>
-
-</body>
-</html>
+  const msg = `نتيجة اختبار العيد:\nالنتيجة: ${score
