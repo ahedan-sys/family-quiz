@@ -42,7 +42,6 @@ body {
 .section { display: none; }
 .section.active { display: block; }
 
-/* مفرقعات العيد */
 .fireworks {
   text-align: center;
   font-size: 28px;
@@ -153,16 +152,15 @@ input[type="text"] {
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
-  <!-- مفرقعات العيد -->
   <div class="fireworks">
     <span>✨</span><span>🎉</span><span>✨</span>
   </div>
 
-  <!-- عبارة الترحيب -->
   <div style="
     text-align:center;
     margin-bottom:20px;
@@ -180,7 +178,6 @@ input[type="text"] {
     </div>
   </div>
 
-  <!-- صفحة البداية -->
   <div id="startPage" class="section active">
     <label class="label">الاسم الأول</label>
     <input type="text" id="firstName" placeholder="اكتب اسمك">
@@ -191,7 +188,6 @@ input[type="text"] {
     <button class="btn btn-primary" onclick="startQuiz()">ابدأ الاختبار</button>
   </div>
 
-  <!-- صفحة الأسئلة -->
   <div id="questionPage" class="section">
     <div id="questionNumber"></div>
 
@@ -210,7 +206,6 @@ input[type="text"] {
     <button class="btn btn-secondary" onclick="prevQuestion()">السابق</button>
   </div>
 
-  <!-- صفحة النتيجة -->
   <div id="resultPage" class="section">
     <div class="result-title">🌙✨ نتيجة اختبار العيد ✨🌙</div>
     <div class="result-score" id="resultScore"></div>
@@ -224,10 +219,8 @@ input[type="text"] {
   </div>
 
 </div>
+
 <script>
-/* ============================
-      الأسئلة (32 سؤال)
-============================ */
 const questions = [
   { q: "من اكثر شخص سافر داخل المملكة وخارجها؟", options: ["اعتدال","راشد","محمد","عبدالعزيز"], answer: 4 },
   { q: "ماهي ابعد دولة من السعودية سافر لها؟", options: ["اعتدال","راشد","نورة","عبدالعزيز"], answer: 1 },
@@ -263,9 +256,6 @@ const questions = [
   { q: "من يحب السيارات؟", options: ["عساف وعبدالرحمن","وليد وفهد","سليمان وبدر","نواف وعبدالله"], answer: 1 }
 ];
 
-/* ============================
-      نظام المحاولتين
-============================ */
 let attempts = localStorage.getItem("attempts")
   ? Number(localStorage.getItem("attempts"))
   : 0;
@@ -283,18 +273,12 @@ if (attempts >= 2) {
   `;
 }
 
-/* ============================
-      متغيرات عامة
-============================ */
 let currentQuestion = 0;
 let score = 0;
 let userAnswers = [];
 let timer;
-let timeLeft = 1800; // 30 دقيقة
+let timeLeft = 1800;
 
-/* ============================
-      بدء الاختبار
-============================ */
 function startQuiz() {
   let first = document.getElementById("firstName").value.trim();
   let father = document.getElementById("fatherName").value.trim();
@@ -323,9 +307,6 @@ function startQuiz() {
   startTimer();
 }
 
-/* ============================
-      تحميل السؤال
-============================ */
 function loadQuestion() {
   const q = questions[currentQuestion];
 
@@ -350,9 +331,6 @@ function loadQuestion() {
   }
 }
 
-/* ============================
-      اختيار إجابة
-============================ */
 function selectOption(num) {
   userAnswers[currentQuestion] = num;
   highlightSelected(num);
@@ -365,9 +343,6 @@ function highlightSelected(num) {
   document.getElementById("opt" + num).style.background = "#16a34a";
 }
 
-/* ============================
-      التالي
-============================ */
 function nextQuestion() {
   if (!userAnswers[currentQuestion]) {
     alert("الرجاء اختيار إجابة");
@@ -382,9 +357,6 @@ function nextQuestion() {
   }
 }
 
-/* ============================
-      السابق
-============================ */
 function prevQuestion() {
   if (currentQuestion > 0) {
     currentQuestion--;
@@ -392,9 +364,6 @@ function prevQuestion() {
   }
 }
 
-/* ============================
-      التايمر 30 دقيقة
-============================ */
 function startTimer() {
   timer = setInterval(() => {
     timeLeft--;
@@ -406,9 +375,7 @@ function startTimer() {
     }
   }, 1000);
 }
-  /* ============================
-      إنهاء الاختبار
-============================ */
+
 function finishQuiz() {
   clearInterval(timer);
 
@@ -437,25 +404,18 @@ function finishQuiz() {
   document.getElementById("attemptsInfo").innerText =
     `هذه كانت محاولتك رقم ${attempts} من 2`;
 
-  /* منع الرجوع بعد النتيجة */
   history.pushState(null, null, location.href);
   window.onpopstate = function () {
     history.go(1);
   };
 }
 
-/* ============================
-      واتساب
-============================ */
 function sendWhatsApp() {
   const msg = `نتيجة اختبار العيد:\nالنتيجة: ${score} من ${questions.length}`;
   const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank");
 }
 
-/* ============================
-      إعادة المحاولة
-============================ */
 function restartQuiz() {
   if (attempts >= 2) {
     alert("لقد استنفدت جميع المحاولات");
