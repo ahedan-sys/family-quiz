@@ -3,55 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>مغامرة بدر والبطة الهاربة</title>
+
     <style>
-        body { margin: 0; overflow: hidden; background: #cceeff; }
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #cceeff;
+            font-family: sans-serif;
+        }
+
         #player {
-            width: 50px; height: 50px;
+            width: 60px;
+            height: 60px;
             background: yellow;
-            position: absolute; bottom: 0; left: 50px;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
             border-radius: 50%;
         }
+
         #enemy {
-            width: 60px; height: 60px;
+            width: 70px;
+            height: 70px;
             background: red;
-            position: absolute; bottom: 0; right: 50px;
+            position: absolute;
+            bottom: 0;
+            right: 50px;
             border-radius: 50%;
+        }
+
+        #title {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
         }
     </style>
 </head>
+
 <body>
+
+    <div id="title">مغامرة بدر والبطة الهاربة</div>
+
     <div id="player"></div>
     <div id="enemy"></div>
 
-    <script src="game.js"></script>
+    <script>
+        let player = document.getElementById("player");
+        let enemy = document.getElementById("enemy");
+
+        let playerX = 50;
+        let enemyX = window.innerWidth - 100;
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") playerX += 20;
+            if (e.key === "ArrowLeft") playerX -= 20;
+        });
+
+        function gameLoop() {
+            player.style.left = playerX + "px";
+
+            enemyX -= 2;
+            enemy.style.left = enemyX + "px";
+
+            if (enemyX - playerX < 50) {
+                alert("انتهت اللعبة! بدر لم يستطع حماية البطة");
+                location.reload();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+
 </body>
 </html>
-let player = document.getElementById("player");
-let enemy = document.getElementById("enemy");
-
-let playerX = 50;
-let enemyX = window.innerWidth - 100;
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") playerX += 20;
-    if (e.key === "ArrowLeft") playerX -= 20;
-});
-
-function gameLoop() {
-    // حركة بدر (البطة)
-    player.style.left = playerX + "px";
-
-    // حركة العدو
-    enemyX -= 2;
-    enemy.style.left = enemyX + "px";
-
-    // إذا لحق العدو بدر
-    if (enemyX - playerX < 40) {
-        alert("انتهت اللعبة! بدر لم يستطع الهرب");
-        location.reload();
-    }
-
-    requestAnimationFrame(gameLoop);
-}
-
-gameLoop();
